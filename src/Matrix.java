@@ -61,6 +61,43 @@ public class Matrix {
         }
     }
 
+    public void insert(int row, int col, int value) {
+        Node newest = new Node(row, col, value);
+
+        Node cur = R[row];
+
+        if (cur == null || cur.col > col) {
+            newest.next_in_row = cur;
+            R[row] = newest;
+
+        } else if (cur.col == col) {
+            throw new RuntimeException("Cannot insert on existing node.");
+        } else {
+
+            while (cur.next_in_row != null && cur.next_in_row.col < col)
+                cur = cur.next_in_row;
+
+            if (cur.next_in_row != null && cur.next_in_row.col == col)
+                throw new RuntimeException("Cannot insert on existing node.");
+
+            newest.next_in_row = cur.next_in_row;
+            cur.next_in_row = newest;
+        }
+
+        cur = C[col];
+
+        if (cur == null || cur.row > row) {
+            newest.next_in_col = cur;
+            C[col] = newest;
+        } else {
+            while (cur.next_in_col != null && cur.next_in_col.row < row)
+                cur = cur.next_in_col;
+
+            newest.next_in_col = cur.next_in_col;
+            cur.next_in_col = newest;
+        }
+    }
+
     public void print() {
 
         System.out.println("ROW   COL   VAL    NIR    NIC");
@@ -75,6 +112,5 @@ public class Matrix {
                 cur = cur.next_in_row;
             }
         }
-
     }
 }

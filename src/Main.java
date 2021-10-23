@@ -28,12 +28,33 @@ public class Main {
         BufferedReader br = new BufferedReader(fr);
         String line;
 
-        for (int c = 0; (line = br.readLine()) != null ; c++) {
+        for (int c = 0; (line = br.readLine()) != null; c++) {
             matrix[c] = Stream.of(line.split(","))
                     .mapToInt(Integer::parseInt).toArray();
         }
 
         Matrix M = new Matrix(matrix, height, width);
         System.out.println("matrix created.");
+
+        while (true) {
+
+
+            System.out.println("MENU:");
+            System.out.println("0) Insert -row -col -value");
+            System.out.println("4) Print");
+            System.out.println("6) Exit");
+            try {
+                switch (sc.nextInt()) {
+                    case 0 -> {
+                        M.insert(sc.nextInt(), sc.nextInt(), sc.nextInt());
+                        System.out.println("new node inserted.");
+                    }
+                    case 4 -> M.print();
+                    case 6 -> System.exit(0);
+                }
+            } catch (RuntimeException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
 }
