@@ -44,6 +44,7 @@ public class Main {
             System.out.println("2) Search -value");
             System.out.println("3) Update -row -col -value");
             System.out.println("4) Print -type [0-1]");
+            System.out.println("5) Save File");
             System.out.println("6) Exit");
 
             try {
@@ -60,14 +61,18 @@ public class Main {
                         System.out.println("search result:");
                         M.search(sc.nextInt());
                     }
-                    case 3-> {
+                    case 3 -> {
                         M.update(sc.nextInt(), sc.nextInt(), sc.nextInt());
                         System.out.println("node updated.");
                     }
                     case 4 -> M.print(sc.nextInt());
+                    case 5 -> {
+                        M.save_file();
+                        System.out.println("file saved.");
+                    }
                     case 6 -> System.exit(0);
                 }
-            } catch (InstantiationError ex) {
+            } catch (RuntimeException ex) {
                 System.out.println(ex.getMessage());
             }
         }

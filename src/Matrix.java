@@ -1,3 +1,6 @@
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Matrix {
     Node[] R;
     Node[] C;
@@ -202,5 +205,40 @@ public class Matrix {
                 }
             }
         }
+    }
+
+    public void save_file() throws IOException {
+        int height = R.length;
+        int width = C.length;
+
+        String filename = String.format("M(%d,%d).csv", height, width);
+        new FileWriter(filename).close();
+        FileWriter fr = new FileWriter(filename, true);
+
+        for (Node head : R) {
+            int col = 0;
+            Node cur = head;
+
+            while (cur != null) {
+                for (int i = col; i < cur.col; i++)
+                    fr.write("0,");
+
+                col = cur.col + 1;
+
+                fr.write(String.valueOf(cur.value));
+                if (col < width)
+                    fr.write(',');
+
+                cur = cur.next_in_row;
+            }
+
+            for (int i = col; i < width; i++) {
+                fr.write('0');
+                if (i < width - 1)
+                    fr.write(',');
+            }
+            fr.write('\n');
+        }
+        fr.close();
     }
 }
