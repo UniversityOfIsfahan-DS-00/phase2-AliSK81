@@ -148,22 +148,6 @@ public class Matrix {
 
     }
 
-    public void print() {
-
-        System.out.println("ROW   COL   VAL    NIR    NIC");
-
-        for (Node head : R) {
-            Node cur = head;
-            while (cur != null) {
-                System.out.printf("%-5d %-5d %-6d %-6s %-6s\n",
-                        cur.row, cur.col, cur.value,
-                        cur.next_in_row, cur.next_in_col);
-
-                cur = cur.next_in_row;
-            }
-        }
-    }
-
     public void update(int row, int col, int value) {
         if (value == 0)
             throw new RuntimeException("Invalid value.");
@@ -177,5 +161,46 @@ public class Matrix {
             throw new RuntimeException("Node not exist.");
 
         cur.value = value;
+    }
+
+    public void print(int type) {
+        int width = C.length;
+
+        if (type == 0) {
+            for (Node head : R) {
+                int col = 0;
+                Node cur = head;
+
+                while (cur != null) {
+                    for (int i = col; i < cur.col; i++)
+                        System.out.print("0\t");
+
+                    System.out.print(cur.value + "\t");
+                    col = cur.col + 1;
+                    cur = cur.next_in_row;
+                }
+
+                for (int i = 0; i < width - col; i++)
+                    System.out.print("0\t");
+
+                System.out.println();
+            }
+        }
+
+        if (type == 1) {
+
+            System.out.println("ROW   COL   VAL    NIR    NIC");
+
+            for (Node head : R) {
+                Node cur = head;
+                while (cur != null) {
+                    System.out.printf("%-5d %-5d %-6d %-6s %-6s\n",
+                            cur.row, cur.col, cur.value,
+                            cur.next_in_row, cur.next_in_col);
+
+                    cur = cur.next_in_row;
+                }
+            }
+        }
     }
 }

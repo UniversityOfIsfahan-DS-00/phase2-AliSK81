@@ -43,7 +43,7 @@ public class Main {
             System.out.println("1) Delete -row -col");
             System.out.println("2) Search -value");
             System.out.println("3) Update -row -col -value");
-            System.out.println("4) Print");
+            System.out.println("4) Print -type [0-1]");
             System.out.println("6) Exit");
 
             try {
@@ -64,10 +64,10 @@ public class Main {
                         M.update(sc.nextInt(), sc.nextInt(), sc.nextInt());
                         System.out.println("node updated.");
                     }
-                    case 4 -> M.print();
+                    case 4 -> M.print(sc.nextInt());
                     case 6 -> System.exit(0);
                 }
-            } catch (RuntimeException ex) {
+            } catch (InstantiationError ex) {
                 System.out.println(ex.getMessage());
             }
         }
