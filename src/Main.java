@@ -38,16 +38,21 @@ public class Main {
 
         while (true) {
 
-
             System.out.println("MENU:");
             System.out.println("0) Insert -row -col -value");
+            System.out.println("1) Delete -row -col");
             System.out.println("4) Print");
             System.out.println("6) Exit");
+
             try {
                 switch (sc.nextInt()) {
                     case 0 -> {
                         M.insert(sc.nextInt(), sc.nextInt(), sc.nextInt());
                         System.out.println("new node inserted.");
+                    }
+                    case 1 -> {
+                        M.delete(sc.nextInt(), sc.nextInt());
+                        System.out.println("node deleted.");
                     }
                     case 4 -> M.print();
                     case 6 -> System.exit(0);

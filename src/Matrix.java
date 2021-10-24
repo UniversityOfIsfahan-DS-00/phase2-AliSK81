@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Matrix {
     Node[] R;
     Node[] C;
@@ -95,6 +93,38 @@ public class Matrix {
 
             newest.next_in_col = cur.next_in_col;
             cur.next_in_col = newest;
+        }
+    }
+
+    public void delete(int row, int col) {
+        Node cur = R[row];
+
+        if (cur == null)
+            throw new RuntimeException("Node not exist.");
+
+        else if (cur.col == col)
+            R[row] = cur.next_in_row;
+
+        else {
+            while (cur.next_in_row != null && cur.next_in_row.col < col)
+                cur = cur.next_in_row;
+
+            if (cur.next_in_row != null && cur.next_in_row.col == col)
+                cur.next_in_row = cur.next_in_row.next_in_row;
+            else
+                throw new RuntimeException("Node not exist.");
+        }
+
+        cur = C[col];
+
+        if (cur.row == row)
+            C[col] = cur.next_in_col;
+        else {
+            while (cur.next_in_col != null && cur.next_in_col.row < row)
+                cur = cur.next_in_col;
+
+            assert cur.next_in_col != null;
+            cur.next_in_col = cur.next_in_col.next_in_col;
         }
     }
 
