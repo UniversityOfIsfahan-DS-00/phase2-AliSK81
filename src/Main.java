@@ -41,6 +41,7 @@ public class Main {
             System.out.println("MENU:");
             System.out.println("0) Insert -row -col -value");
             System.out.println("1) Delete -row -col");
+            System.out.println("2) Search -value");
             System.out.println("4) Print");
             System.out.println("6) Exit");
 
@@ -53,6 +54,10 @@ public class Main {
                     case 1 -> {
                         M.delete(sc.nextInt(), sc.nextInt());
                         System.out.println("node deleted.");
+                    }
+                    case 2 -> {
+                        System.out.println("search result:");
+                        M.search(sc.nextInt());
                     }
                     case 4 -> M.print();
                     case 6 -> System.exit(0);

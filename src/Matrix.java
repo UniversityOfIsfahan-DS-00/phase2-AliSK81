@@ -128,6 +128,26 @@ public class Matrix {
         }
     }
 
+
+    public void search(int value) {
+        boolean found = false;
+
+        for (Node head : R) {
+            Node cur = head;
+
+            while (cur != null) {
+                if (cur.value == value) {
+                    System.out.printf("(%d, %d)\n", cur.row, cur.col);
+                    found = true;
+                }
+                cur = cur.next_in_row;
+            }
+        }
+        if (!found)
+            System.out.println("No result.");
+
+    }
+
     public void print() {
 
         System.out.println("ROW   COL   VAL    NIR    NIC");
