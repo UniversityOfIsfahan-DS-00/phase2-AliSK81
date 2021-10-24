@@ -163,4 +163,19 @@ public class Matrix {
             }
         }
     }
+
+    public void update(int row, int col, int value) {
+        if (value == 0)
+            throw new RuntimeException("Invalid value.");
+
+        Node cur = R[row];
+
+        while (cur != null && cur.col < col)
+            cur = cur.next_in_row;
+
+        if (cur == null || cur.col != col)
+            throw new RuntimeException("Node not exist.");
+
+        cur.value = value;
+    }
 }
